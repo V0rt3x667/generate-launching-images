@@ -8,7 +8,7 @@
 # - https://retropie.org.uk/forum/topic/4611/runcommand-system-splashscreens
 #
 # Requirements:
-# - RetroPie 4.0.3+
+# - ArchRGS 1.0.1+
 # - the imagemagick package installed (it means 26.1 MB of disk space used).
 #
 # TODO: 
@@ -27,7 +27,7 @@ user="$SUDO_USER"
 home="$(eval echo ~$user)"
 
 readonly ES_DIR=("$home/.emulationstation" "/etc/emulationstation")
-readonly CONFIGDIR="/opt/retropie/configs"
+readonly CONFIGDIR="/opt//configs"
 readonly TMP_BACKGROUND="/tmp/background.png"
 readonly TMP_LOGO="/tmp/system_logo.png"
 readonly TMP_LAUNCHING="/tmp/tmp_launching.png"
@@ -65,26 +65,6 @@ function safe_exit() {
     exit $1
 }
 
-
-
-# checking dependencies
-function check_dep() {
-    # checking if we have the imagemagick installed
-    if ! which convert > /dev/null; then
-        echo "ERROR: The imagemagick package isn't installed!"
-        echo "Please install it with 'sudo apt-get install imagemagick'."
-        exit 1
-    fi
-    # if we are running under X we need feh
-    if [[ -n "$DISPLAY" ]] && ! which feh > /dev/null; then
-        echo "ERROR: The feh package isn't installed!"
-        echo "Please install it with 'sudo apt-get install feh'."
-        exit 1
-    fi
-}
-
-
-
 function usage() {
     echo
     echo "USAGE: $(basename $0) -t theme-name [options]"
@@ -92,8 +72,6 @@ function usage() {
     echo "Use '--help' to see all the options"
     echo
 }
-
-
 
 # deal with command line arguments
 function get_options() {
@@ -359,8 +337,6 @@ function show_image() {
     fi
 }
 
-
-
 function get_systems() {
     # interrupt if user explicitly defined the system with --system
     [[ -n "$SYSTEMS_ARRAY" ]] && return 0
@@ -373,8 +349,6 @@ function get_systems() {
     [[ -z "$system_list" ]] && return 1
     SYSTEMS_ARRAY=($system_list)
 }
-
-
 
 # Get the useful data for a theme of a specific system. The "system" global
 # variable must be filled.
@@ -528,8 +502,6 @@ function proceed() {
       20 75 || exit 0
 }
 
-
-
 function create_launching_image() {
     if [[ -z "$SYSTEM" ]]; then
         echo "ERROR: create_launching_image(): the system is undefined."
@@ -617,8 +589,6 @@ function prepare_background() {
     fi
 }
 
-
-
 function add_logo() {
     [[ "$NO_LOGO" = "1" ]] && return
 
@@ -645,8 +615,6 @@ function add_logo() {
 
     return $?
 }
-
-
 
 function add_text() {
     local font=
@@ -676,8 +644,6 @@ function add_text() {
 
     return $?
 }
-
-
 
 # start here ################################################################
 
