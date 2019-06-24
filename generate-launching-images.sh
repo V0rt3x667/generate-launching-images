@@ -7,27 +7,16 @@
 # - https://github.com/retropie/retropie-setup/wiki/runcommand#adding-custom-launching-images
 # - https://retropie.org.uk/forum/topic/4611/runcommand-system-splashscreens
 #
-# Requirements:
-# - ArchRGS 1.0.1+
-# - the imagemagick package installed (it means 26.1 MB of disk space used).
-#
-# TODO: 
-# - check every <include>d file and dump in a big temporary xml file.
-# - --loading-text-belt
-# - --press-button-text-belt
-# - --es-view
-# - --logo-color
-# - --ratio
 
 # globals ###################################################################
 
-# avoiding problems when running via sudo
+# avoid problems when running via sudo
 user="$SUDO_USER"
 [[ -z "$user" ]] && user="$(id -un)"
 home="$(eval echo ~$user)"
 
 readonly ES_DIR=("$home/.emulationstation" "/etc/emulationstation")
-readonly CONFIGDIR="/opt//configs"
+readonly CONFIGDIR="/opt/archrgs/configs"
 readonly TMP_BACKGROUND="/tmp/background.png"
 readonly TMP_LOGO="/tmp/system_logo.png"
 readonly TMP_LAUNCHING="/tmp/tmp_launching.png"
